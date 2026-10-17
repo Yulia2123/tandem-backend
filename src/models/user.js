@@ -6,6 +6,15 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
     avatarUrl: {
       type: String,
       default: "",
@@ -24,7 +33,13 @@ const userSchema = new Schema(
   {
     collection: "users",
     versionKey: false,
-  }
+  },
 );
+
+userSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 export const userModel = model("User", userSchema);
