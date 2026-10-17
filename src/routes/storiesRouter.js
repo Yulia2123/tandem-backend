@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getAllStories } from "../controllers/stories/getStories";
+import { getAllStories } from "../controllers/stories/getStories.js";
 import { celebrate } from "celebrate";
-import { getAllStoriesValidationSchema } from "../validations/storiesValidation";
+import { getAllStoriesValidationSchema } from "../validations/storiesValidation.js";
 
 const storiesRouter = Router();
 storiesRouter.get('/api/stories',celebrate(getAllStoriesValidationSchema), getAllStories)

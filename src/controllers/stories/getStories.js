@@ -1,4 +1,4 @@
-import { storyModel } from "../../models/story";
+import { storyModel } from "../../models/story.js";
 
 export const getAllStories = async (req, res) => {
   const { perPage = 10, page = 1, category, popular = "asc" } = req.query;
@@ -7,7 +7,7 @@ export const getAllStories = async (req, res) => {
   if (category) {
     storiesQuery.where("category").equal(category);
   }
-  [totalStories, stories] = Promise.all([
+  [totalStories, stories] = await Promise.all([
     storiesQuery.clone().countDocuments(),
     storiesQuery
       .skip(skip)

@@ -1,4 +1,5 @@
 import { Joi, Segments } from "celebrate";
+import { CATEGORIES } from "../constants/constants";
 export const getAllStoriesValidationSchema = {
     [Segments.QUERY]: Joi.object({
     perPage: Joi.number().integer().min(5).max(20).default(10),
