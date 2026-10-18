@@ -1,3 +1,4 @@
+import { createStory } from "./stories/createStory.js";
 import { registerUser } from "./auth/registerUser.js";
 import { loginUser } from "./auth/loginUser.js";
 import { getCategories } from "./categories/getCategories.js";
@@ -16,4 +17,5 @@ export const categories = {
 
 export const stories = {
   getStoryById,
+  createStory,
 };
