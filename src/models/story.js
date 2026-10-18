@@ -34,7 +34,7 @@ const storySchema = new Schema(
     },
   },
   {
-    collection: "articles",
+    collection: "stories",
     versionKey: false,
   }
 );

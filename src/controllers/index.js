@@ -1,6 +1,7 @@
 import { registerUser } from "./auth/registerUser.js";
 import { loginUser } from "./auth/loginUser.js";
 import { getCategories } from "./categories/getCategories.js";
+import { getStoryById } from "./stories/getStoryById.js";
 import { logoutUser } from "./auth/logoutUser.js";
 
 export const auth = {
@@ -11,4 +12,8 @@ export const auth = {
 
 export const categories = {
   getCategories,
+};
+
+export const stories = {
+  getStoryById,
 };
