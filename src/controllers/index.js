@@ -4,6 +4,7 @@ import { refreshUserSession } from "./auth/refreshUserSession.js";
 import { getCategories } from "./categories/getCategories.js";
 import { getStoryById } from "./stories/getStoryById.js";
 import { logoutUser } from "./auth/logoutUser.js";
+import { getCurrentUserStories } from "./users/getCurrentUserStories.js";
 
 export const auth = {
   registerUser,
@@ -18,4 +19,8 @@ export const categories = {
 
 export const stories = {
   getStoryById,
+};
+
+export const users = {
+  getCurrentUserStories,
 };

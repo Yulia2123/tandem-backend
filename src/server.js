@@ -26,7 +26,7 @@ app.use(helmet());
 app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
-app.use("/api/user", userRouter);
+app.use("/api/users", userRouter);
 app.use("/api/stories", storiesRouter);
 app.use("/api/categories", categoriesRouter);
 
@@ -38,12 +38,10 @@ const startServer = async () => {
   try {
     await connectToMongoDB();
 
-    app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
-    });
+    app.listen(PORT);
   } catch (error) {
-    console.error("Failed to start server:", error);
-    process.exit(1);
+    process.exitCode = 1;
+    throw error;
   }
 };
 
