@@ -11,8 +11,6 @@ export const getStoryById = async (req, res) => {
 
   const story = await storyModel.findOne({ _id: storyId });
 
-  console.log(story);
-
   if (!story) {
     throw createHttpError(404, "Story not found");
   }
