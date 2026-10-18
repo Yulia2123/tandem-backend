@@ -3,9 +3,9 @@ import { storyModel } from "../../models/story.js";
 
 export const getSavedStories = async (req, res, next) => {
   try {
-    const { per = "1", perPage = "10" } = req.query;
+    const { page = "1", perPage = "10" } = req.query;
 
-    const currentPage = Number(per);
+    const currentPage = Number(page);
     const limit = Number(perPage);
 
     if (
