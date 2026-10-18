@@ -2,6 +2,7 @@ import { registerUser } from "./auth/registerUser.js";
 import { loginUser } from "./auth/loginUser.js";
 import { getCategories } from "./categories/getCategories.js";
 import { getStoryById } from "./stories/getStoryById.js";
+import { getRecommendedStories } from "./stories/getRecommendedStories.js";
 import { logoutUser } from "./auth/logoutUser.js";
 
 export const auth = {
@@ -16,4 +17,5 @@ export const categories = {
 
 export const stories = {
   getStoryById,
+  getRecommendedStories,
 };
