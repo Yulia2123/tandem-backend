@@ -5,6 +5,7 @@ import { refreshUserSession } from "./auth/refreshUserSession.js";
 import { getCategories } from "./categories/getCategories.js";
 import { getStoryById } from "./stories/getStoryById.js";
 import { getRecommendedStories } from "./stories/getRecommendedStories.js";
+import { getAllStories } from "./stories/getStories.js";
 import { logoutUser } from "./auth/logoutUser.js";
 import { getCurrentUserStories } from "./users/getCurrentUserStories.js";
 
@@ -23,6 +24,7 @@ export const stories = {
   createStory,
   getStoryById,
   getRecommendedStories,
+  getAllStories,
 };
 
 export const users = {

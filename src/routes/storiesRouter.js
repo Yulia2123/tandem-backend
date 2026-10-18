@@ -5,7 +5,7 @@ import { authenticate } from "../middleware/authenticate.js";
 import {
   getAllStoriesValidationSchema,
   getStoryIdValidationSchema,
-  createStoryValidationSchema, // Схема валідації для створення історії
+  createStoryValidationSchema,
 } from "../validations/storiesValidation.js";
 
 const storiesRouter = Router();
