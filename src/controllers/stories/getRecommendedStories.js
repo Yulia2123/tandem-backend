@@ -4,7 +4,7 @@ import { storyModel } from "../../models/story.js";
 
 export const getRecommendedStories = async (req, res) => {
   const { storyId } = req.params;
-  const { perPage = 10, page = 1 } = req.query;
+  const { page = 1, perPage = 10 } = req.query;
   const skip = (page - 1) * perPage;
 
   if (!mongoose.isValidObjectId(storyId)) {
