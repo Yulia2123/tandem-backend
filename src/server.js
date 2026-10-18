@@ -8,10 +8,12 @@ import cookieParser from "cookie-parser";
 import { connectToMongoDB } from "./db/connectToMongoDB.js";
 import { notFoundHandler } from "./middleware/notFoundHandler.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/usersRouter.js";
 import storiesRouter from "./routes/storiesRouter.js";
 import categoriesRouter from "./routes/categoriesRouter.js";
+
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const PORT = process.env.PORT ?? 3000;
