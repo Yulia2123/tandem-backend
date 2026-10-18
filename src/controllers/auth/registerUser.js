@@ -19,8 +19,6 @@ export const registerUser = async (req, res) => {
     password: hashedPassword,
   });
 
-  console.log(newUser);
-
   const newSession = await createSession(newUser._id);
 
   setSessionCookies(res, newSession);
