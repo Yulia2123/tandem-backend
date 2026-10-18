@@ -36,7 +36,9 @@ const storySchema = new Schema(
   {
     collection: "stories",
     versionKey: false,
-  }
+  },
 );
+
+storySchema.index({ category: 1, rate: -1, date: -1 });
 
 export const storyModel = model("Story", storySchema);
