@@ -34,9 +34,9 @@ const storySchema = new Schema(
     },
   },
   {
-    collection: "articles",
+    collection: "stories",
     versionKey: false,
   }
 );
 
-export const storyModel = model("Story", articleSchema);
+export const storyModel = model("Story", storySchema);
