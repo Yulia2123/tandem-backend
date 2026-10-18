@@ -1,17 +1,42 @@
 import { Router } from "express";
-import { getAllStories } from "../controllers/stories/getStories.js";
-import { createStory } from "../controllers/stories/createStory.js";
-import { authenticate } from "../middleware/authenticate.js";
 import { celebrate } from "celebrate";
-import { getAllStoriesValidationSchema } from "../validations/storiesValidation.js";
 import { stories as ctrl } from "../controllers/index.js";
+import { authenticate } from "../middleware/authenticate.js";
+import {
+  getAllStoriesValidationSchema,
+  getStoryIdValidationSchema,
+  createStoryValidationSchema, // Схема валідації для створення історії
+} from "../validations/storiesValidation.js";
 
 const storiesRouter = Router();
 
-// Ендпоінт для створення історії поточним користувачем (Завдання №10)
-storiesRouter.post("/", authenticate, createStory);
+// Отримання всіх історій (префікс /api/stories вже заданий у server.js)
+storiesRouter.get(
+  "/",
+  celebrate(getAllStoriesValidationSchema),
+  ctrl.getAllStories || ctrl.getStories,
+);
 
-storiesRouter.get("/:storyId", ctrl.getStoryById);
-storiesRouter.get("/", celebrate(getAllStoriesValidationSchema), getAllStories);
+// Створення нової історії (Завдання №10)
+storiesRouter.post(
+  "/",
+  authenticate,
+  celebrate(createStoryValidationSchema),
+  ctrl.createStory,
+);
+
+// Отримання конкретної історії за ID
+storiesRouter.get(
+  "/:storyId",
+  celebrate(getStoryIdValidationSchema),
+  ctrl.getStoryById,
+);
+
+// Отримання рекомендованих історій
+storiesRouter.get(
+  "/:storyId/recommended",
+  celebrate(getStoryIdValidationSchema),
+  ctrl.getRecommendedStories,
+);
 
 export default storiesRouter;
