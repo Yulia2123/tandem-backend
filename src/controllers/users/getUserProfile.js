@@ -1,7 +1,7 @@
 
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
-
+import "../../models/category.js";
 import { userModel } from "../../models/user.js";
 import { storyModel } from "../../models/story.js";
 
