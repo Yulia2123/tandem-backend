@@ -1,4 +1,3 @@
-
 import express from "express";
 import dns from "node:dns";
 import cors from "cors";
@@ -22,7 +21,14 @@ const PORT = process.env.PORT ?? 3000;
 const app = express();
 
 app.use(express.json({ limit: "5mb" }));
-app.use(cors({ methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"] }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(helmet());
 app.use(cookieParser());
 

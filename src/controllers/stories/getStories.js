@@ -1,25 +1,35 @@
 import { storyModel } from "../../models/story.js";
 
 export const getAllStories = async (req, res) => {
-  const { perPage = 10, page = 1, category, popular = "asc" } = req.query;
-  const skip = (page - 1) * perPage;
-  const storiesQuery = storyModel.find();
-  if (category) {
-    storiesQuery.where("category").equal(category);
+  try {
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const perPage = Math.max(1, Number(req.query.perPage) || 10);
+    const { category } = req.query;
+    const popular = req.query.popular === "desc" ? "desc" : "asc";
+
+    const storiesQuery = category ? { category } : {};
+
+    const [totalItems, stories] = await Promise.all([
+      storyModel.countDocuments(storiesQuery),
+      storyModel
+        .find(storiesQuery)
+        .skip((page - 1) * perPage)
+        .limit(perPage)
+        .sort({ rate: popular }),
+    ]);
+
+    const totalPages = Math.ceil(totalItems / perPage);
+
+    res.status(200).json({
+      page,
+      perPage,
+      totalItems,
+      totalPages,
+      stories,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch stories",
+    });
   }
-  [totalStories, stories] = await Promise.all([
-    storiesQuery.clone().countDocuments(),
-    storiesQuery
-      .skip(skip)
-      .limit(perPage)
-      .sort({ ["rate"]: popular }),
-  ]);
-  const totalPages = Math.ceil(totalItems / perPage);
-  res.status(200).json({
-    page,
-    perPage,
-    totalItems,
-    totalPages,
-    stories,
-  });
 };
