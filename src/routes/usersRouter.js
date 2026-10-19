@@ -1,12 +1,20 @@
 
 import { Router } from "express";
 import { celebrate } from "celebrate";
-
-import { users as ctrl } from "../controllers/index.js";
 import { authenticate } from "../middleware/authenticate.js";
-import { getCurrentUserStoriesValidationSchema } from "../validations/usersValidation.js";
+import { users as ctrl } from "../controllers/index.js";
+import {
+    getCurrentUserStoriesValidationSchema,
+    getUserProfileValidationSchema,
+} from "../validations/usersValidation.js";
 
 const userRouter = Router();
+
+userRouter.get(
+  "/me",
+  authenticate,
+  ctrl.getCurrentUser
+);
 
 userRouter.get(
   "/me/stories",
@@ -31,6 +39,12 @@ userRouter.delete(
   "/me/saved-stories/:storyId",
   authenticate,
   ctrl.removeSavedStory,
+);
+
+userRouter.get(
+  "/:userId",
+  celebrate(getUserProfileValidationSchema),
+  ctrl.getUserProfile
 );
 
 export default userRouter;
