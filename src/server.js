@@ -38,9 +38,7 @@ const startServer = async () => {
   try {
     await connectToMongoDB();
 
-    app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+    app.listen(PORT);
   } catch (error) {
     process.exitCode = 1;
     throw error;
