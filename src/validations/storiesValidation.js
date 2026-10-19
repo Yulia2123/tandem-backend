@@ -11,12 +11,23 @@ export const getAllStoriesValidationSchema = {
     perPage: Joi.number().integer().min(5).max(20).default(10),
     page: Joi.number().min(1).default(1),
     category: Joi.string().valid(...CATEGORIES),
-    popular: Joi.string().valid('asc', 'desc'),
+    popular: Joi.string().valid("asc", "desc"),
   }),
 };
 
 export const getStoryIdValidationSchema = {
   [Segments.PARAMS]: Joi.object({
     storyId: Joi.string().custom(objectIdValidator).required(),
+  }),
+};
+
+export const createStoryValidationSchema = {
+  [Segments.BODY]: Joi.object({
+    img: Joi.string().required(),
+    title: Joi.string().required(),
+    article: Joi.string().required(),
+    category: Joi.string().custom(objectIdValidator).required(),
+    rate: Joi.number().min(0).default(0),
+    date: Joi.string().required(),
   }),
 };
