@@ -12,6 +12,7 @@ import { getCurrentUser } from "./users/getCurrentUser.js";
 import { getSavedStories } from "./users/getSavedStories.js";
 import { saveStory } from "./users/saveStory.js";
 import { removeSavedStory } from "./users/removeSavedStory.js";
+import { getTravellers } from "./users/getTravellers.js";
 
 export const auth = {
   registerUser,
@@ -33,6 +34,7 @@ export const users = {
   getCurrentUser,
   getCurrentUserStories,
   getUserProfile,
+  getTravellers,
   getSavedStories,
   saveStory,
   removeSavedStory,

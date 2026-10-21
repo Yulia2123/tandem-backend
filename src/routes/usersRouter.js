@@ -41,6 +41,8 @@ userRouter.delete(
   ctrl.removeSavedStory,
 );
 
+userRouter.get("/", ctrl.getTravellers);
+
 userRouter.get(
   "/:userId",
   celebrate(getUserProfileValidationSchema),
