@@ -10,33 +10,31 @@ import {
 
 const storiesRouter = Router();
 
-// Отримання всіх історій (префікс /api/stories вже заданий у server.js)
 storiesRouter.get(
   "/",
   celebrate(getAllStoriesValidationSchema),
-  ctrl.getAllStories || ctrl.getStories,
+  ctrl.getAllStories
 );
 
-// Створення нової історії (Завдання №10)
+// question: Few images
 storiesRouter.post(
   "/",
   authenticate,
+  upload.single("img"),
   celebrate(createStoryValidationSchema),
-  ctrl.createStory,
+  ctrl.createStory
 );
 
-// Отримання конкретної історії за ID
 storiesRouter.get(
   "/:storyId",
   celebrate(getStoryIdValidationSchema),
-  ctrl.getStoryById,
+  ctrl.getStoryById
 );
 
-// Отримання рекомендованих історій
 storiesRouter.get(
   "/:storyId/recommended",
   celebrate(getStoryIdValidationSchema),
-  ctrl.getRecommendedStories,
+  ctrl.getRecommendedStories
 );
 
 export default storiesRouter;

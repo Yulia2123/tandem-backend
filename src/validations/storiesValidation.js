@@ -23,7 +23,6 @@ export const getStoryIdValidationSchema = {
 
 export const createStoryValidationSchema = {
   [Segments.BODY]: Joi.object({
-    img: Joi.string().required(),
     title: Joi.string().required(),
     article: Joi.string().required(),
     category: Joi.string().custom(objectIdValidator).required(),
