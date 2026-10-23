@@ -30,11 +30,13 @@ export const getSavedStories = async (req, res, next) => {
       .findById(req.user._id)
       .select("savedArticles");
 
+
     if (!user) {
       return res.status(404).json({
         message: "User not found",
       });
     }
+
 
     const savedStoryIds = user.savedArticles;
     const stories = await storyModel
