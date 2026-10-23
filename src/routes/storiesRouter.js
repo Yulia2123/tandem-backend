@@ -2,6 +2,7 @@ import { Router } from "express";
 import { celebrate } from "celebrate";
 import { stories as ctrl } from "../controllers/index.js";
 import { authenticate } from "../middleware/authenticate.js";
+import { upload } from "../middleware/upload.js";
 import {
   getAllStoriesValidationSchema,
   getStoryIdValidationSchema,
