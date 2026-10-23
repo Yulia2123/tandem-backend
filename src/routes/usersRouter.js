@@ -6,6 +6,7 @@ import { getStoryIdValidationSchema } from "../validations/storiesValidation.js"
 import {
   getCurrentUserStoriesValidationSchema,
   getUserProfileValidationSchema,
+  getTravellersValidationSchema,
 } from "../validations/usersValidation.js";
 
 const userRouter = Router();
@@ -30,7 +31,11 @@ userRouter.delete(
   ctrl.removeSavedStory
 );
 
-userRouter.get("/", ctrl.getTravellers);
+userRouter.get(
+  "/",
+  celebrate(getTravellersValidationSchema),
+  ctrl.getTravellers
+);
 
 userRouter.get(
   "/:userId",
