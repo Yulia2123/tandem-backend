@@ -28,7 +28,8 @@ export const getSavedStories = async (req, res, next) => {
 
     const user = await userModel
       .findById(req.user._id)
-      .select("savedStories");
+      .select("savedArticles");
+
 
     if (!user) {
       return res.status(404).json({
@@ -36,7 +37,8 @@ export const getSavedStories = async (req, res, next) => {
       });
     }
 
-    const savedStoryIds = user.savedStories;
+
+    const savedStoryIds = user.savedArticles;
     const stories = await storyModel
       .find({ _id: { $in: savedStoryIds } })
       .select("img title category rate date")
