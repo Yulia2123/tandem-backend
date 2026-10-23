@@ -70,11 +70,20 @@ npm install
 ```env
 PORT=3000
 MONGODB_URI=<your-mongodb-connection-string>
+CLOUDINARY_CLOUD_NAME=<your-cloud-name>
+CLOUDINARY_API_KEY=<your-api-key>
+CLOUDINARY_API_SECRET=<your-api-secret>
 ```
 
 Замість `<your-mongodb-connection-string>` вкажіть рядок підключення до MongoDB Atlas.
 
 Переконайтеся, що файл `.env` доданий до .gitignore і не потрапляє до Git-репозиторію.
+
+### Зміна аватара
+
+Авторизований користувач може надіслати `PATCH /api/users/me/avatar` у форматі
+`multipart/form-data`. Назва поля з файлом — `avatar`. Підтримуються JPG, PNG,
+WEBP і GIF розміром до 5 МБ. Успішна відповідь повертає новий `avatarUrl`.
 
 Файл `.env.example` містить лише шаблон змінних без реальних паролів та секретних ключів.
 

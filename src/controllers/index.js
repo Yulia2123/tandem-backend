@@ -14,6 +14,7 @@ import { getCurrentUser } from "./users/getCurrentUser.js";
 import { saveStory } from "./users/saveStory.js";
 import { removeSavedStory } from "./users/removeSavedStory.js";
 import { getTravellers } from "./users/getTravellers.js";
+import { updateAvatar } from "./users/updateAvatar.js";
 
 export const auth = {
   registerUser,
@@ -41,4 +42,5 @@ export const users = {
   getSavedStories,
   saveStory,
   removeSavedStory,
+  updateAvatar,
 };
