@@ -10,7 +10,9 @@ export const errorHandler = (err, req, res, next) => {
         ? "Only one image is allowed"
         : "Error uploading image";
 
-    return res.status(400).json({ message });
+    return res.status(err.code === "LIMIT_FILE_SIZE" ? 413 : 400).json({
+      message,
+    });
   }
 
   if (err.message === "Only image files are allowed") {

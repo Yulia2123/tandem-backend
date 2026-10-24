@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { celebrate } from "celebrate";
 import { authenticate } from "../middleware/authenticate.js";
+import { uploadAvatar } from "../middleware/uploadAvatar.js";
 import { users as ctrl } from "../controllers/index.js";
 import { getStoryIdValidationSchema } from "../validations/storiesValidation.js";
 import {
@@ -12,6 +13,13 @@ import {
 const userRouter = Router();
 
 userRouter.get("/me", authenticate, ctrl.getCurrentUser);
+
+userRouter.patch(
+  "/me/avatar",
+  authenticate,
+  uploadAvatar,
+  ctrl.updateAvatar,
+);
 
 userRouter.get(
   "/me/stories",
