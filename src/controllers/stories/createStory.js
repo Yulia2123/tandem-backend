@@ -1,13 +1,20 @@
+import createHttpError from "http-errors";
 import { storyModel } from "../../models/story.js";
+import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
 export const createStory = async (req, res, next) => {
   try {
-    // Отримуємо ID поточного користувача з об'єкта запиту (який заповнює авторизація)
+    if (!req.file) {
+      throw createHttpError(400, "Story image is required");
+    }
+
     const ownerId = req.user._id;
 
-    // Створюємо нову історію, додаючи до даних із тіла запиту ownerId
+    const uploadedImage = await uploadToCloudinary(req.file.buffer);
+
     const newStory = await storyModel.create({
       ...req.body,
+      img: uploadedImage.secure_url,
       ownerId,
     });
 

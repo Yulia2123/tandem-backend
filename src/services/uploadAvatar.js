@@ -1,7 +1,7 @@
-import { v2 as cloudinary } from "cloudinary";
+import { cloudinary } from "../config/cloudinary.js";
 import createHttpError from "http-errors";
 
-const configureCloudinary = () => {
+const ensureCloudinaryConfiguration = () => {
   const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } =
     process.env;
 
@@ -9,15 +9,10 @@ const configureCloudinary = () => {
     throw createHttpError(500, "Cloudinary configuration is missing");
   }
 
-  cloudinary.config({
-    cloud_name: CLOUDINARY_CLOUD_NAME,
-    api_key: CLOUDINARY_API_KEY,
-    api_secret: CLOUDINARY_API_SECRET,
-  });
 };
 
 export const uploadAvatarToCloudinary = (buffer) => {
-  configureCloudinary();
+  ensureCloudinaryConfiguration();
 
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(

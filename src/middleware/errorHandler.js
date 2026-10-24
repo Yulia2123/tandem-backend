@@ -3,12 +3,21 @@ import multer from "multer";
 
 export const errorHandler = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
-    const isTooLarge = err.code === "LIMIT_FILE_SIZE";
+    const message =
+      err.code === "LIMIT_FILE_SIZE"
+        ? "Image size must not exceed 5 MB"
+        : err.code === "LIMIT_FILE_COUNT"
+        ? "Only one image is allowed"
+        : "Error uploading image";
 
-    return res.status(isTooLarge ? 413 : 400).json({
-      message: isTooLarge
-        ? "Avatar image must not exceed 5 MB"
-        : "Invalid avatar upload",
+    return res.status(err.code === "LIMIT_FILE_SIZE" ? 413 : 400).json({
+      message,
+    });
+  }
+
+  if (err.message === "Only image files are allowed") {
+    return res.status(400).json({
+      message: "Please upload an image file",
     });
   }
 
@@ -20,7 +29,7 @@ export const errorHandler = (err, req, res, next) => {
 
   const isProd = process.env.NODE_ENV === "production";
 
-  res.status(500).json({
-    message: isProd ? "Oops, it's an error :)" : err.message,
+  return res.status(500).json({
+    message: isProd ? "Internal server error" : err.message,
   });
 };
