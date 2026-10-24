@@ -37,8 +37,8 @@ app.use("/api/users", userRouter);
 app.use("/api/stories", storiesRouter);
 app.use("/api/categories", categoriesRouter);
 
-app.use(notFoundHandler);
 app.use(errors());
+app.use(notFoundHandler);
 app.use(errorHandler);
 
 const startServer = async () => {
