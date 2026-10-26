@@ -15,9 +15,6 @@ export const getAllStoriesValidationSchema = {
   }),
 };
 
-// const objectIdValidator = (value, helpers) => {
-//   return !isValidObjectId(value) ? helpers.message("Invalid id format") : value;
-// };
 
 // export const getAllStoriesValidationSchema = {
 //   [Segments.QUERY]: Joi.object({
