@@ -26,10 +26,11 @@ export const saveStory = async (req, res, next) => {
       throw createHttpError(404, "User not found");
     }
 
+    const savedIds = user.savedStories ?? [];
 
-    const savedIds = user.savedArticles;
-
-    const alreadySaved = savedIds.some((id) => id.toString() === storyId);
+    const alreadySaved = savedIds.some(
+      (id) => id.toString() === storyId,
+    );
 
     if (alreadySaved) {
       return res.status(200).json({
@@ -37,11 +38,12 @@ export const saveStory = async (req, res, next) => {
       });
     }
 
-    savedIds.push(story._id);
+    user.savedStories = savedIds;
+    user.savedStories.push(story._id);
 
     await user.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Story saved successfully",
     });
   } catch (error) {
