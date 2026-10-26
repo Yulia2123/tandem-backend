@@ -4,10 +4,18 @@ export const getAllStories = async (req, res) => {
   try {
     const page = Math.max(1, Number(req.query.page) || 1);
     const perPage = Math.max(1, Number(req.query.perPage) || 10);
-    const { category } = req.query;
+    const { category, ownerId } = req.query;
     const popular = req.query.popular === "desc" ? "desc" : "asc";
 
-    const storiesQuery = category ? { category } : {};
+    const storiesQuery = {};
+
+    if (category) {
+      storiesQuery.category = category;
+    }
+
+    if (ownerId) {
+      storiesQuery.ownerId = ownerId;
+    }
 
     const [totalItems, stories] = await Promise.all([
       storyModel.countDocuments(storiesQuery),

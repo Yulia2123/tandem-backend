@@ -12,6 +12,7 @@ export const getAllStoriesValidationSchema = {
     page: Joi.number().min(1).default(1),
     category: Joi.string().valid(...CATEGORIES),
     popular: Joi.string().valid("asc", "desc"),
+    ownerId: Joi.string().custom(objectIdValidator),
   }),
 };
 
