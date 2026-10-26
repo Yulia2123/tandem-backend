@@ -26,6 +26,7 @@ export const saveStory = async (req, res, next) => {
       throw createHttpError(404, "User not found");
     }
 
+
     const savedIds = user.savedStories ?? [];
 
     const alreadySaved = savedIds.some(

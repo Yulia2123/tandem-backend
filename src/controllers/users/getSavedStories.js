@@ -26,6 +26,7 @@ export const getSavedStories = async (req, res, next) => {
       });
     }
 
+
     const user = await userModel
       .findById(req.user._id)
       .select("savedStories");
@@ -36,7 +37,9 @@ export const getSavedStories = async (req, res, next) => {
       });
     }
 
+
     const savedStoryIds = user.savedStories ?? [];
+
 
     const stories = await storyModel
       .find({ _id: { $in: savedStoryIds } })
