@@ -19,15 +19,25 @@ export const removeSavedStory = async (req, res, next) => {
       throw createHttpError(404, "User not found");
     }
 
+
+    const savedIds = user.savedStories ?? [];
+
+    const isSaved = savedIds.some(
+      (id) => id.toString() === storyId
+    );
+
     const savedIds = user.savedStories;
 
     const isSaved = savedIds.some((id) => id.toString() === storyId);
+
 
     if (!isSaved) {
       throw createHttpError(404, "Story is not saved");
     }
 
-    user.savedArticles = savedIds.filter((id) => id.toString() !== storyId);
+    user.savedStories = savedIds.filter(
+      (id) => id.toString() !== storyId
+    );
 
     await user.save();
 
