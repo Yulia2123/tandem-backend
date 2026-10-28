@@ -21,12 +21,16 @@ const PORT = process.env.PORT ?? 3000;
 const app = express();
 
 app.use(express.json({ limit: "5mb" }));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://tandem-front.vercel.app",
+  "https://tandem-front-git-dev-hw-2.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     credentials: true,
-    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(helmet());
