@@ -26,10 +26,7 @@ export const getSavedStories = async (req, res, next) => {
       });
     }
 
-
-    const user = await userModel
-      .findById(req.user._id)
-      .select("savedStories");
+    const user = await userModel.findById(req.user._id).select("savedStories");
 
     if (!user) {
       return res.status(404).json({
@@ -37,17 +34,15 @@ export const getSavedStories = async (req, res, next) => {
       });
     }
 
-
     const savedStoryIds = user.savedStories ?? [];
-
 
     const stories = await storyModel
       .find({ _id: { $in: savedStoryIds } })
-      .select("img title category rate date")
+      .select("img title category rate date ownerId")
       .lean();
 
     const storiesById = new Map(
-      stories.map((story) => [story._id.toString(), story]),
+      stories.map((story) => [story._id.toString(), story])
     );
 
     const orderedStories = savedStoryIds
