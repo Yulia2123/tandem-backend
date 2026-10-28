@@ -29,7 +29,7 @@ export const getRecommendedStories = async (req, res) => {
 
   const [totalStories, stories] = await Promise.all([
     storyModel.countDocuments(filter),
-    storyModel.find(filter).skip(skip).limit(perPage).sort(sortOptions),
+    storyModel.find(filter).skip(skip).limit(perPage).sort(sortOptions).populate('ownerId', 'name'),
   ]);
 
   const totalPages = Math.ceil(totalStories / perPage);
