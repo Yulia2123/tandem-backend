@@ -16,16 +16,6 @@ export const getAllStoriesValidationSchema = {
   }),
 };
 
-
-// export const getAllStoriesValidationSchema = {
-//   [Segments.QUERY]: Joi.object({
-//     perPage: Joi.number().integer().min(5).max(20).default(10),
-//     page: Joi.number().min(1).default(1),
-//     category: Joi.string().valid(...CATEGORIES),
-//     popular: Joi.string().valid("asc", "desc"),
-//   }),
-// };
-
 export const getStoryIdValidationSchema = {
   [Segments.PARAMS]: Joi.object({
     storyId: Joi.string().custom(objectIdValidator).required(),
