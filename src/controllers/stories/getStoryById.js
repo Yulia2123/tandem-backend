@@ -9,7 +9,7 @@ export const getStoryById = async (req, res) => {
     throw createHttpError(404, "Story not found");
   }
 
-  const story = await storyModel.findOne({ _id: storyId });
+  const story = await storyModel.findOne({ _id: storyId }).populate('ownerId', 'name');
 
   if (!story) {
     throw createHttpError(404, "Story not found");
