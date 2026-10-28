@@ -23,7 +23,7 @@ export const getAllStories = async (req, res) => {
         .find(storiesQuery)
         .skip((page - 1) * perPage)
         .limit(perPage)
-        .sort({ rate: popular })
+      .sort({ rate: popular, _id: 1 })
         .populate('ownerId', 'name'),
     ]);
 

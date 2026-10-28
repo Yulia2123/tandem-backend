@@ -1,9 +1,9 @@
 import { Joi, Segments } from "celebrate";
-import { CATEGORIES } from "../constants/constants.js";
+// import { CATEGORIES } from "../constants/constants.js";
 import { isValidObjectId } from "mongoose";
 
 const objectIdValidator = (value, helpers) => {
-  return !isValidObjectId(value) ? helpers.message("Invalid id format") : value;
+  return !isValidObjectId(value) ? helpers.message("Invalid id format"): value;
 };
 
 export const getAllStoriesValidationSchema = {
