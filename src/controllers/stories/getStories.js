@@ -23,7 +23,8 @@ export const getAllStories = async (req, res) => {
         .find(storiesQuery)
         .skip((page - 1) * perPage)
         .limit(perPage)
-        .sort({ rate: popular }),
+        .sort({ rate: popular })
+        .populate('ownerId', 'name'),
     ]);
 
     const totalPages = Math.ceil(totalItems / perPage);
